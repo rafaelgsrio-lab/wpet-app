@@ -1,33 +1,20 @@
-# WPet App 🐶🐱
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-Aplicativo multiplataforma (Android e iOS) da **WPet**, especializado em roupas pós-cirúrgicas e ortopédicas para cães e gatos.
+# Run and deploy your AI Studio app
 
-## 📱 Sobre o aplicativo
-O app WPet foi desenvolvido para ajudar tutores e profissionais da área pet a escolherem corretamente o tamanho ideal da roupa para seus animais, considerando:
+This contains everything you need to run your app locally.
 
-- Espécie (cão ou gato)
-- Sexo (macho ou fêmea, com design fisiológico específico)
-- Peso do animal
+View your app in AI Studio: https://ai.studio/apps/temp/1
 
-Além disso, o aplicativo permite contato direto via WhatsApp para pedidos e atendimento personalizado.
+## Run Locally
 
-## ✨ Funcionalidades
-- Catálogo de produtos com imagens oficiais
-- Seleção inteligente de tamanho por espécie, sexo e peso
-- Interface moderna, intuitiva e responsiva
-- Botão de pedido direto via WhatsApp
-- Preparado para Android e iOS
+**Prerequisites:**  Node.js
 
-## 📞 Contato para pedidos
-WhatsApp (Brasil): **+55 24 99261-8871**
 
-## 🚀 Tecnologias
-- Flutter (multiplataforma)
-- Android & iOS
-- Integração com WhatsApp
-
-## 📌 Status do projeto
-🚧 Em desenvolvimento
-
----
-Desenvolvido para a marca **WPet** – conforto, cuidado e proteção para o seu pet.
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
