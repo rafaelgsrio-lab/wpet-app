@@ -3,195 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WPet - Sistema de Pedidos</title>
+    <title>WPet - Conforto que Cura</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; padding-bottom: 80px; }
         .bg-jade { background-color: #80CBC4; }
         .text-jade { color: #00695C; }
-        .alert-wholesale { display: none; }
-        /* Ajuste para o chat não ter espaços vazios */
-        #chat-window { display: flex; flex-direction: column; gap: 1rem; }
+        .nav-active { color: #00695C; border-top: 3px solid #00695C; }
+        .modal-chat { transition: transform 0.3s ease-out; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-slate-50">
 
-    <div id="wholesale-tag" class="alert-wholesale fixed top-24 left-1/2 -translate-x-1/2 z-[100] bg-green-600 text-white px-6 py-3 rounded-full shadow-2xl font-black animate-bounce">
-        🚀 PREÇO DE ATACADO ATIVADO! (20+ ITENS)
-    </div>
-
-    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 h-20">
+    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100 h-16 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-full flex justify-between items-center">
-            <a href="#" onclick="location.reload()" class="flex items-center gap-2 group">
-                <div class="bg-jade p-2 rounded-xl text-white group-hover:scale-110 transition-transform"><i data-lucide="dog"></i></div>
-                <span class="text-2xl font-extrabold tracking-tighter">WPET<span class="text-jade">.</span></span>
-            </a>
-            <div class="bg-slate-900 text-white px-5 py-2 rounded-full text-xs font-black">
-                TOTAL ITENS: <span id="cart-total">0</span>
+            <div onclick="showSection('home')" class="flex items-center gap-2 cursor-pointer">
+                <div class="bg-jade p-1.5 rounded-lg text-white"><i data-lucide="dog" class="w-5 h-5"></i></div>
+                <span class="text-xl font-black tracking-tighter">WPET<span class="text-jade">.</span></span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span id="atacado-badge" class="hidden bg-green-100 text-green-700 text-[10px] font-black px-2 py-1 rounded-full animate-pulse">ATACADO ATIVO</span>
+                <div onclick="showSection('carrinho')" class="relative cursor-pointer">
+                    <i data-lucide="shopping-basket" class="w-6 h-6 text-slate-700"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-slate-900 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+                </div>
             </div>
         </div>
     </nav>
 
-    <section class="py-12 px-4 max-w-7xl mx-auto">
-        <h2 class="text-3xl font-black mb-2 text-center">Nossa Coleção</h2>
-        <p class="text-center text-slate-500 mb-12 italic">500 unidades disponíveis para cada modelo</p>
-        
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="product-grid">
-            </div>
-    </section>
+    <main class="max-w-7xl mx-auto pb-12">
 
-    <section id="assistant" class="py-12 px-4 bg-slate-100">
-        <div class="max-w-xl mx-auto bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-200">
-            <div class="bg-slate-900 p-5 text-white flex items-center gap-3">
-                <div class="bg-jade p-2 rounded-lg text-white"><i data-lucide="bot" class="w-5 h-5"></i></div>
-                <div>
-                    <p class="font-bold text-sm">Assistente WPet</p>
-                    <p class="text-[10px] text-jade font-bold uppercase tracking-widest">Calculadora de Tamanho</p>
-                </div>
+        <section id="sec-home" class="p-4 space-y-6">
+            <div class="bg-slate-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden">
+                <h1 class="text-3xl font-black mb-2 relative z-10">Conforto que cura.</h1>
+                <p class="text-slate-400 text-sm mb-6 relative z-10">Roupas pós-cirúrgicas e ortopédicas de alta tecnologia.</p>
+                <button onclick="showSection('loja')" class="bg-jade text-white px-6 py-3 rounded-2xl font-black text-sm relative z-10">VER CATÁLOGO</button>
+                <div class="absolute right-[-20px] bottom-[-20px] opacity-20"><i data-lucide="heart-pulse" class="w-40 h-40"></i></div>
             </div>
             
-            <div class="p-6 bg-slate-50">
-                <div id="chat-window" class="max-h-[400px] overflow-y-auto mb-4">
-                    <div class="bg-white p-4 rounded-2xl shadow-sm text-sm border border-slate-100 max-w-[85%] self-start text-slate-700">
-                        Olá! Sou o assistente WPet. Vamos calcular o tamanho ideal? <b>Qual o sexo do pet?</b>
-                    </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div onclick="showSection('loja')" class="bg-white p-6 rounded-[2rem] border border-slate-100 text-center cursor-pointer hover:shadow-lg transition-all">
+                    <div class="bg-blue-50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 text-blue-500"><i data-lucide="shopping-bag"></i></div>
+                    <span class="font-bold text-sm text-slate-700">Nossa Loja</span>
                 </div>
-
-                <div id="chat-actions" class="flex flex-wrap gap-2 pt-2 border-t border-slate-200">
-                    <button onclick="stepSex('Macho')" class="bg-slate-900 text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-black transition-all">Macho</button>
-                    <button onclick="stepSex('Fêmea')" class="bg-slate-900 text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-black transition-all">Fêmea</button>
+                <div onclick="showSection('assistente')" class="bg-white p-6 rounded-[2rem] border border-slate-100 text-center cursor-pointer hover:shadow-lg transition-all">
+                    <div class="bg-jade/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 text-jade"><i data-lucide="bot"></i></div>
+                    <span class="font-bold text-sm text-slate-700">Assistente</span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer class="bg-white py-12 border-t text-center text-slate-400">
-        <p class="text-xs font-bold">WPet Indústria e Comércio © 2026</p>
-        <p class="text-[10px] mt-1">CNPJ: 45.252.777/0001-81 | Sapucaia - RJ</p>
-    </footer>
+        <section id="sec-loja" class="hidden p-4">
+            <h2 class="text-2xl font-black mb-6">Cores e Estampas</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="vitrine">
+                </div>
+        </section>
+
+        <section id="sec-carrinho" class="hidden p-4">
+            <h2 class="text-2xl font-black mb-6">Seu Pedido</h2>
+            <div id="cart-list" class="space-y-4 mb-8">
+                <div class="text-center py-12 text-slate-400 font-medium">Seu carrinho está vazio.</div>
+            </div>
+            <div id="cart-footer" class="hidden bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="font-bold text-slate-500 text-sm">Total de Itens:</span>
+                    <span id="total-itens-footer" class="font-black text-xl">0</span>
+                </div>
+                <button onclick="sendWhatsApp()" class="w-full bg-green-600 text-white py-4 rounded-2xl font-black shadow-lg flex items-center justify-center gap-2">
+                    <i data-lucide="message-circle"></i> FINALIZAR NO WHATSAPP
+                </button>
+            </div>
+        </section>
+
+        <section id="sec-assistente" class="hidden p-4">
+            <div class="bg-white rounded-[2.5rem] shadow-xl overflow-hidden border border-slate-100">
+                <div class="bg-slate-900 p-6 text-white flex items-center gap-3">
+                    <i data-lucide="bot" class="text-jade"></i>
+                    <span class="font-bold">Calculadora WPet</span>
+                </div>
+                <div id="chat-box" class="p-6 h-[300px] overflow-y-auto space-y-4 bg-slate-50"></div>
+                <div id="chat-actions" class="p-4 bg-white border-t flex flex-wrap gap-2"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-100 px-6 py-3 z-50 flex justify-between items-center">
+        <button onclick="showSection('home')" class="nav-btn flex flex-col items-center gap-1 text-slate-400" id="btn-home">
+            <i data-lucide="home" class="w-5 h-5"></i><span class="text-[10px] font-bold">Home</span>
+        </button>
+        <button onclick="showSection('loja')" class="nav-btn flex flex-col items-center gap-1 text-slate-400" id="btn-loja">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i><span class="text-[10px] font-bold">Loja</span>
+        </button>
+        <button onclick="showSection('assistente')" class="nav-btn flex flex-col items-center gap-1 text-slate-400" id="btn-assistente">
+            <i data-lucide="bot" class="w-5 h-5"></i><span class="text-[10px] font-bold">Assistente</span>
+        </button>
+        <button onclick="showSection('carrinho')" class="nav-btn flex flex-col items-center gap-1 text-slate-400" id="btn-carrinho">
+            <i data-lucide="shopping-cart" class="w-5 h-5"></i><span class="text-[10px] font-bold">Carrinho</span>
+        </button>
+    </div>
 
     <script>
         lucide.createIcons();
         const WA_NUMBER = "5524992618871";
-        let cartTotal = 0;
-        let assistData = { sex: '', weight: '', color: '', qty: 1 };
+        let carrinho = [];
+        let assistenteData = {};
 
-        const catalog = [
-            { name: "Rosa Candy", color: "#F8BBD0" },
-            { name: "Azul Céu", color: "#B3E5FC" },
-            { name: "Verde Oceânico", color: "#00695C" },
-            { name: "Verde Jade", color: "#80CBC4" },
-            { name: "Love", color: "#ff80ab", desc: "Corações" },
-            { name: "Praia Viva", color: "#4fc3f7", desc: "Estrela-do-mar" },
-            { name: "Zoo Fun", color: "#aed581", desc: "Carinhas" },
-            { name: "Happy Mood", color: "#ffd54f", desc: "Doodles" }
+        const produtos = [
+            { id: 1, nome: "Rosa Candy", img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=200", tipo: "Cor" },
+            { id: 2, nome: "Azul Céu", img: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=200", tipo: "Cor" },
+            { id: 3, nome: "Verde Oceânico", img: "https://images.unsplash.com/photo-1541591415600-61e62747c29e?w=200", tipo: "Cor" },
+            { id: 4, nome: "Verde Jade", img: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=200", tipo: "Cor" },
+            { id: 5, nome: "Love", img: "https://images.unsplash.com/photo-1591768793355-74d7c836038c?w=200", tipo: "Estampa" },
+            { id: 6, nome: "Praia Viva", img: "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=200", tipo: "Estampa" },
+            { id: 7, nome: "Zoo Fun", img: "https://images.unsplash.com/photo-1544568100-847a948585b9?w=200", tipo: "Estampa" },
+            { id: 8, nome: "Happy Mood", img: "https://images.unsplash.com/photo-1530281703222-d309c17315fa?w=200", tipo: "Estampa" }
         ];
 
-        const grid = document.getElementById('product-grid');
-        catalog.forEach((item, index) => {
-            grid.innerHTML += `
-                <div class="bg-white p-4 rounded-[2rem] border border-slate-100 shadow-sm text-center hover:shadow-md transition-all">
-                    <div class="w-full h-20 rounded-2xl mb-3 flex items-center justify-center font-black text-white text-[10px] uppercase shadow-inner" style="background: ${item.color}">
-                        ${item.desc || item.name}
-                    </div>
-                    <h3 class="font-bold text-xs mb-1">${item.name}</h3>
-                    <p class="text-[9px] text-slate-400 font-bold mb-3">500 un. disponíveis</p>
-                    <input type="number" id="qty-${index}" value="0" min="0" onchange="updateTotal()" class="w-full border border-slate-200 rounded-lg text-center font-bold p-1 text-xs focus:ring-2 focus:ring-jade outline-none">
+        // Navegação de Sessões
+        function showSection(id) {
+            document.querySelectorAll('main section').forEach(s => s.classList.add('hidden'));
+            document.getElementById('sec-' + id).classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('text-jade', 'border-t-2', 'border-jade'));
+            document.getElementById('btn-' + id).classList.add('text-jade', 'border-t-2', 'border-jade');
+
+            if(id === 'assistente') initAssistente();
+            if(id === 'carrinho') renderCarrinho();
+            window.scrollTo(0,0);
+        }
+
+        // Renderizar Loja
+        const vitrine = document.getElementById('vitrine');
+        produtos.forEach(p => {
+            vitrine.innerHTML += `
+                <div class="bg-white p-3 rounded-[2rem] border border-slate-100 text-center">
+                    <img src="${p.img}" class="w-full h-24 object-cover rounded-2xl mb-3">
+                    <h3 class="font-bold text-xs">${p.nome}</h3>
+                    <p class="text-[9px] text-slate-400 font-bold mb-3 uppercase">500 un. disponíveis</p>
+                    <button onclick="configurarItem('${p.nome}')" class="w-full bg-jade text-white py-2 rounded-xl text-[10px] font-black">ADICIONAR</button>
                 </div>
             `;
         });
 
-        function updateTotal() {
-            let total = 0;
-            catalog.forEach((_, i) => {
-                total += parseInt(document.getElementById(`qty-${i}`).value) || 0;
-            });
-            cartTotal = total;
-            document.getElementById('cart-total').innerText = total;
-            document.getElementById('wholesale-tag').style.display = total >= 20 ? 'block' : 'none';
+        // Assistente Inteligente
+        function configurarItem(nome) {
+            assistenteData = { modelo: nome };
+            showSection('assistente');
         }
 
-        function talk(text, side = 'bot') {
-            const win = document.getElementById('chat-window');
+        function initAssistente() {
+            const chat = document.getElementById('chat-box');
+            chat.innerHTML = '';
+            talk("Qual o <b>sexo</b> do pet?");
+            document.getElementById('chat-actions').innerHTML = `
+                <button onclick="stepSex('Macho')" class="bg-slate-900 text-white px-4 py-2 rounded-lg font-bold text-xs">Macho</button>
+                <button onclick="stepSex('Fêmea')" class="bg-slate-900 text-white px-4 py-2 rounded-lg font-bold text-xs">Fêmea</button>
+            `;
+        }
+
+        function talk(txt, side = 'bot') {
+            const chat = document.getElementById('chat-box');
             const d = document.createElement('div');
-            d.className = side === 'bot' ? 
-                "bg-white p-4 rounded-2xl shadow-sm text-sm border border-slate-100 max-w-[85%] self-start text-slate-700 mb-2" : 
-                "bg-jade text-white p-3 rounded-2xl shadow-sm text-sm ml-auto max-w-[80%] mb-2 font-bold";
-            d.innerHTML = text;
-            win.appendChild(d);
-            win.scrollTop = win.scrollHeight;
+            d.className = side === 'bot' ? "bg-white p-3 rounded-2xl text-xs border border-slate-200 max-w-[80%]" : "bg-jade text-white p-3 rounded-2xl text-xs ml-auto font-bold";
+            d.innerHTML = txt;
+            chat.appendChild(d);
+            chat.scrollTop = chat.scrollHeight;
         }
 
         function stepSex(s) {
-            assistData.sex = s;
+            assistenteData.sexo = s;
             talk(s, 'user');
-            setTimeout(() => {
-                talk("Qual o <b>peso aproximado</b> do pet em kg?");
-                document.getElementById('chat-actions').innerHTML = `
-                    <div class="flex gap-2 w-full">
-                        <input type="number" id="w-val" class="border border-slate-300 p-2 rounded-xl w-full focus:outline-jade" placeholder="Ex: 8">
-                        <button onclick="stepWeight()" class="bg-jade text-white px-6 py-2 rounded-xl font-bold">OK</button>
-                    </div>
-                `;
-            }, 300);
+            talk("Qual o <b>peso</b> aproximado (kg)?");
+            document.getElementById('chat-actions').innerHTML = `
+                <input type="number" id="w-in" class="border p-2 rounded-lg w-20 text-xs" placeholder="0">
+                <button onclick="stepWeight()" class="bg-jade text-white px-4 py-2 rounded-lg font-bold text-xs">OK</button>
+            `;
         }
 
         function stepWeight() {
-            const weightVal = document.getElementById('w-val').value;
-            if(!weightVal) return alert("Digite o peso!");
-            assistData.weight = weightVal;
-            talk(weightVal + "kg", 'user');
-            setTimeout(() => {
-                talk("Escolha a <b>Cor ou Estampa</b>:");
-                let buttons = '';
-                catalog.forEach(item => {
-                    buttons += `<button onclick="stepColor('${item.name}')" class="border border-slate-200 p-2 rounded-lg text-[10px] font-bold bg-white hover:bg-slate-50 transition-all shadow-sm">${item.name}</button>`;
-                });
-                document.getElementById('chat-actions').innerHTML = `<div class="grid grid-cols-2 gap-2 w-full">${buttons}</div>`;
-            }, 300);
+            const w = document.getElementById('w-in').value;
+            assistenteData.peso = w;
+            assistenteData.tamanho = w <= 3 ? "01" : w <= 6 ? "02" : "03"; // Simulação de cálculo
+            talk(w + "kg", 'user');
+            talk(`Tamanho sugerido: <b>${assistenteData.tamanho}</b>. Quantas unidades?`);
+            document.getElementById('chat-actions').innerHTML = `
+                <input type="number" id="q-in" class="border p-2 rounded-lg w-20 text-xs" value="1">
+                <button onclick="addFinal()" class="bg-slate-900 text-white px-4 py-2 rounded-lg font-bold text-xs">ADICIONAR</button>
+            `;
         }
 
-        function stepColor(c) {
-            assistData.color = c;
-            talk(c, 'user');
-            setTimeout(() => {
-                talk("Qual a <b>quantidade</b> deste item?");
-                document.getElementById('chat-actions').innerHTML = `
-                    <div class="flex gap-2 w-full">
-                        <input type="number" id="q-val" class="border border-slate-300 p-2 rounded-xl w-full focus:outline-jade" value="1">
-                        <button onclick="stepFinish()" class="bg-slate-900 text-white px-6 py-2 rounded-xl font-bold uppercase text-xs">Próximo</button>
+        function addFinal() {
+            assistenteData.qtd = parseInt(document.getElementById('q-in').value);
+            carrinho.push({...assistenteData});
+            updateBadges();
+            talk("Item adicionado ao carrinho!", 'bot');
+            document.getElementById('chat-actions').innerHTML = `
+                <button onclick="showSection('loja')" class="bg-slate-100 text-slate-600 px-4 py-2 rounded-lg font-bold text-xs">ESCOLHER MAIS</button>
+                <button onclick="showSection('carrinho')" class="bg-jade text-white px-4 py-2 rounded-lg font-bold text-xs">VER CARRINHO</button>
+            `;
+        }
+
+        function updateBadges() {
+            const total = carrinho.reduce((acc, i) => acc + i.qtd, 0);
+            document.getElementById('cart-count').innerText = total;
+            document.getElementById('atacado-badge').style.display = total >= 20 ? 'block' : 'none';
+        }
+
+        function renderCarrinho() {
+            const list = document.getElementById('cart-list');
+            const footer = document.getElementById('cart-footer');
+            if(carrinho.length === 0) {
+                list.innerHTML = `<div class="text-center py-12 text-slate-400 font-medium text-sm">Seu carrinho está vazio.</div>`;
+                footer.classList.add('hidden');
+                return;
+            }
+            footer.classList.remove('hidden');
+            list.innerHTML = '';
+            carrinho.forEach((item, idx) => {
+                list.innerHTML += `
+                    <div class="bg-white p-4 rounded-2xl flex justify-between items-center border border-slate-100">
+                        <div>
+                            <p class="font-bold text-sm">${item.modelo} - Tam ${item.tamanho}</p>
+                            <p class="text-[10px] text-slate-400">${item.sexo} | ${item.peso}kg</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="font-black text-jade">${item.qtd}un</span>
+                            <button onclick="remover(${idx})" class="text-red-400"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </div>
                     </div>
                 `;
-            }, 300);
+            });
+            document.getElementById('total-itens-footer').innerText = carrinho.reduce((acc, i) => acc + i.qtd, 0);
+            lucide.createIcons();
         }
 
-        function stepFinish() {
-            assistData.qty = document.getElementById('q-val').value;
-            talk(assistData.qty + " unidades", 'user');
-            setTimeout(() => {
-                talk("<b>Cálculo concluído!</b> Clique abaixo para enviar as especificações ao nosso WhatsApp.");
-                document.getElementById('chat-actions').innerHTML = `
-                    <button onclick="sendWA()" class="bg-green-600 text-white w-full py-4 rounded-2xl font-black shadow-lg hover:bg-green-700 transition-all flex items-center justify-center gap-2">
-                        <i data-lucide="message-circle"></i> ENVIAR PEDIDO AGORA
-                    </button>
-                `;
-                lucide.createIcons();
-            }, 300);
+        function remover(idx) {
+            carrinho.splice(idx, 1);
+            updateBadges();
+            renderCarrinho();
         }
 
-        function sendWA() {
-            const msg = `Olá WPet! Tenho interesse no seguinte pedido:
+        function sendWhatsApp() {
+            const total = carrinho.reduce((acc, i) => acc + i.qtd, 0);
+            let lista = carrinho.map(i => `• ${i.qtd}x ${i.modelo} (Tam: ${i.tamanho}) - ${i.sexo}`).join('\n');
+            const msg = `Olá WPet! Gostaria de finalizar meu pedido:
 ---
-🐾 *Pet:* ${assistData.sex} / ${assistData.weight}kg
-🎨 *Modelo:* ${assistData.color}
-🔢 *Qtd do Assistente:* ${assistData.qty} un
-🛒 *Total Geral no Carrinho:* ${cartTotal} un
+${lista}
 ---
-${cartTotal >= 20 ? "🚀 *PEDIDO COM PREÇO DE ATACADO*" : "🔹 Pedido de Varejo"}`;
+📦 Total: ${total} unidades
+${total >= 20 ? "🚀 *PEDIDO COM PREÇO DE ATACADO*" : "🛒 Varejo"}
+Aguardo o atendimento!`;
             window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`);
         }
+
+        // Iniciar na Home
+        showSection('home');
     </script>
 </body>
 </html>
