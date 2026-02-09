@@ -3,264 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WPet - Conforto que Cura</title>
+    <title>WPet - Loja Oficial</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; padding-bottom: 80px; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; padding-bottom: 90px; }
         .bg-jade { background-color: #80CBC4; }
         .text-jade { color: #00695C; }
-        .nav-active { color: #00695C; border-top: 3px solid #00695C; }
-        .modal-chat { transition: transform 0.3s ease-out; }
+        .tab-active { border-bottom: 4px solid #80CBC4; color: #00695C; }
     </style>
 </head>
 <body class="bg-slate-50">
 
-    <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100 h-16 shadow-sm">
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 h-16 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 h-full flex justify-between items-center">
-            <div onclick="showSection('home')" class="flex items-center gap-2 cursor-pointer">
+            <div onclick="location.reload()" class="flex items-center gap-2 cursor-pointer">
                 <div class="bg-jade p-1.5 rounded-lg text-white"><i data-lucide="dog" class="w-5 h-5"></i></div>
-                <span class="text-xl font-black tracking-tighter">WPET<span class="text-jade">.</span></span>
+                <span class="text-xl font-black tracking-tighter uppercase">WPET<span class="text-jade">.</span></span>
             </div>
-            <div class="flex items-center gap-2">
-                <span id="atacado-badge" class="hidden bg-green-100 text-green-700 text-[10px] font-black px-2 py-1 rounded-full animate-pulse">ATACADO ATIVO</span>
-                <div onclick="showSection('carrinho')" class="relative cursor-pointer">
-                    <i data-lucide="shopping-basket" class="w-6 h-6 text-slate-700"></i>
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-slate-900 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">0</span>
+            <div class="flex items-center gap-3">
+                <span id="atacado-alert" class="hidden bg-green-500 text-white text-[10px] font-black px-3 py-1 rounded-full animate-bounce">ATACADO ATIVO!</span>
+                <div onclick="showSection('carrinho')" class="relative cursor-pointer bg-slate-100 p-2 rounded-full">
+                    <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-jade text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">0</span>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto pb-12">
+    <main class="max-w-7xl mx-auto">
+        
+        <section id="sec-loja" class="p-4">
+            <div class="flex gap-6 mb-8 border-b overflow-x-auto">
+                <button onclick="filterCategory('cirurgica')" id="tab-cirurgica" class="tab-active py-2 font-bold text-sm whitespace-nowrap">Roupas Pós-Cirúrgicas</button>
+                <button onclick="filterCategory('ortopedica')" id="tab-ortopedica" class="py-2 font-bold text-sm text-slate-400 whitespace-nowrap">Roupas Ortopédicas</button>
+            </div>
 
-        <section id="sec-home" class="p-4 space-y-6">
-            <div class="bg-slate-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden">
-                <h1 class="text-3xl font-black mb-2 relative z-10">Conforto que cura.</h1>
-                <p class="text-slate-400 text-sm mb-6 relative z-10">Roupas pós-cirúrgicas e ortopédicas de alta tecnologia.</p>
-                <button onclick="showSection('loja')" class="bg-jade text-white px-6 py-3 rounded-2xl font-black text-sm relative z-10">VER CATÁLOGO</button>
-                <div class="absolute right-[-20px] bottom-[-20px] opacity-20"><i data-lucide="heart-pulse" class="w-40 h-40"></i></div>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-4">
-                <div onclick="showSection('loja')" class="bg-white p-6 rounded-[2rem] border border-slate-100 text-center cursor-pointer hover:shadow-lg transition-all">
-                    <div class="bg-blue-50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 text-blue-500"><i data-lucide="shopping-bag"></i></div>
-                    <span class="font-bold text-sm text-slate-700">Nossa Loja</span>
+            <div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 </div>
-                <div onclick="showSection('assistente')" class="bg-white p-6 rounded-[2rem] border border-slate-100 text-center cursor-pointer hover:shadow-lg transition-all">
-                    <div class="bg-jade/10 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 text-jade"><i data-lucide="bot"></i></div>
-                    <span class="font-bold text-sm text-slate-700">Assistente</span>
-                </div>
-            </div>
         </section>
 
-        <section id="sec-loja" class="hidden p-4">
-            <h2 class="text-2xl font-black mb-6">Cores e Estampas</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="vitrine">
+        <section id="sec-assistente" class="hidden p-4 fixed inset-0 z-[60] bg-slate-900/50 flex items-end md:items-center justify-center">
+            <div class="bg-white w-full max-w-lg rounded-t-[2.5rem] md:rounded-[2.5rem] shadow-2xl overflow-hidden animate-slide-up">
+                <div class="bg-slate-900 p-5 text-white flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="bot" class="text-jade"></i>
+                        <span class="font-bold text-sm" id="assist-title">Configurar Pedido</span>
+                    </div>
+                    <button onclick="closeAssistant()" class="p-1"><i data-lucide="x"></i></button>
                 </div>
+                <div id="chat-box" class="p-6 h-[320px] overflow-y-auto space-y-4 bg-slate-50 flex flex-col"></div>
+                <div id="chat-actions" class="p-5 bg-white border-t flex flex-wrap gap-2"></div>
+            </div>
         </section>
 
         <section id="sec-carrinho" class="hidden p-4">
-            <h2 class="text-2xl font-black mb-6">Seu Pedido</h2>
-            <div id="cart-list" class="space-y-4 mb-8">
-                <div class="text-center py-12 text-slate-400 font-medium">Seu carrinho está vazio.</div>
-            </div>
-            <div id="cart-footer" class="hidden bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm">
-                <div class="flex justify-between items-center mb-6">
-                    <span class="font-bold text-slate-500 text-sm">Total de Itens:</span>
-                    <span id="total-itens-footer" class="font-black text-xl">0</span>
+            <h2 class="text-2xl font-black mb-6">Meu Carrinho</h2>
+            <div id="cart-items" class="space-y-4 mb-6"></div>
+            <div id="cart-empty" class="text-center py-20 text-slate-400">Seu carrinho está vazio.</div>
+            <div id="cart-total-box" class="hidden bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100">
+                <div class="flex justify-between items-center mb-4 font-bold">
+                    <span>Total de Itens:</span>
+                    <span id="total-qty">0</span>
                 </div>
-                <button onclick="sendWhatsApp()" class="w-full bg-green-600 text-white py-4 rounded-2xl font-black shadow-lg flex items-center justify-center gap-2">
+                <button onclick="sendWA()" class="w-full bg-green-600 text-white py-4 rounded-2xl font-black flex items-center justify-center gap-2 shadow-lg">
                     <i data-lucide="message-circle"></i> FINALIZAR NO WHATSAPP
                 </button>
             </div>
         </section>
 
-        <section id="sec-assistente" class="hidden p-4">
-            <div class="bg-white rounded-[2.5rem] shadow-xl overflow-hidden border border-slate-100">
-                <div class="bg-slate-900 p-6 text-white flex items-center gap-3">
-                    <i data-lucide="bot" class="text-jade"></i>
-                    <span class="font-bold">Calculadora WPet</span>
-                </div>
-                <div id="chat-box" class="p-6 h-[300px] overflow-y-auto space-y-4 bg-slate-50"></div>
-                <div id="chat-actions" class="p-4 bg-white border-t flex flex-wrap gap-2"></div>
-            </div>
-        </section>
-
     </main>
 
-    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-100 px-6 py-3 z-50 flex justify-between items-center">
-        <button onclick="showSection('home')" class="nav-btn flex flex-col items-center gap-1 text-slate-400" id="btn-home">
-            <i data-lucide="home" class="w-5 h-5"></i><span class="text-[10px] font-bold">Home</span>
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t px-8 py-4 flex justify-between items-center z-50">
+        <button onclick="location.reload()" class="flex flex-col items-center gap-1 text-jade">
+            <i data-lucide="home" class="w-6 h-6"></i><span class="text-[10px] font-bold">Home</span>
         </button>
-        <button onclick="showSection('loja')" class="nav-btn flex flex-col items-center gap-1 text-slate-400" id="btn-loja">
-            <i data-lucide="shopping-bag" class="w-5 h-5"></i><span class="text-[10px] font-bold">Loja</span>
+        <button onclick="showSection('loja')" class="flex flex-col items-center gap-1 text-slate-400">
+            <i data-lucide="layout-grid" class="w-6 h-6"></i><span class="text-[10px] font-bold">Loja</span>
         </button>
-        <button onclick="showSection('assistente')" class="nav-btn flex flex-col items-center gap-1 text-slate-400" id="btn-assistente">
-            <i data-lucide="bot" class="w-5 h-5"></i><span class="text-[10px] font-bold">Assistente</span>
-        </button>
-        <button onclick="showSection('carrinho')" class="nav-btn flex flex-col items-center gap-1 text-slate-400" id="btn-carrinho">
-            <i data-lucide="shopping-cart" class="w-5 h-5"></i><span class="text-[10px] font-bold">Carrinho</span>
+        <button onclick="showSection('carrinho')" class="flex flex-col items-center gap-1 text-slate-400">
+            <i data-lucide="shopping-bag" class="w-6 h-6"></i><span class="text-[10px] font-bold">Carrinho</span>
         </button>
     </div>
 
     <script>
         lucide.createIcons();
         const WA_NUMBER = "5524992618871";
-        let carrinho = [];
-        let assistenteData = {};
+        let cart = [];
+        let activeItem = {};
 
-        const produtos = [
-            { id: 1, nome: "Rosa Candy", img: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=200", tipo: "Cor" },
-            { id: 2, nome: "Azul Céu", img: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=200", tipo: "Cor" },
-            { id: 3, nome: "Verde Oceânico", img: "https://images.unsplash.com/photo-1541591415600-61e62747c29e?w=200", tipo: "Cor" },
-            { id: 4, nome: "Verde Jade", img: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=200", tipo: "Cor" },
-            { id: 5, nome: "Love", img: "https://images.unsplash.com/photo-1591768793355-74d7c836038c?w=200", tipo: "Estampa" },
-            { id: 6, nome: "Praia Viva", img: "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=200", tipo: "Estampa" },
-            { id: 7, nome: "Zoo Fun", img: "https://images.unsplash.com/photo-1544568100-847a948585b9?w=200", tipo: "Estampa" },
-            { id: 8, nome: "Happy Mood", img: "https://images.unsplash.com/photo-1530281703222-d309c17315fa?w=200", tipo: "Estampa" }
+        const products = [
+            { id: 1, cat: 'cirurgica', name: 'Rosa Candy', img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=200' },
+            { id: 2, cat: 'cirurgica', name: 'Azul Céu', img: 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=200' },
+            { id: 3, cat: 'cirurgica', name: 'Verde Oceânico', img: 'https://images.unsplash.com/photo-1541591415600-61e62747c29e?w=200' },
+            { id: 4, cat: 'cirurgica', name: 'Verde Jade', img: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=200' },
+            { id: 5, cat: 'ortopedica', name: 'Love (Corações)', img: 'https://images.unsplash.com/photo-1591768793355-74d7c836038c?w=200' },
+            { id: 6, cat: 'ortopedica', name: 'Praia Viva', img: 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=200' },
+            { id: 7, cat: 'ortopedica', name: 'Zoo Fun', img: 'https://images.unsplash.com/photo-1544568100-847a948585b9?w=200' },
+            { id: 8, cat: 'ortopedica', name: 'Happy Mood', img: 'https://images.unsplash.com/photo-1530281703222-d309c17315fa?w=200' }
         ];
 
-        // Navegação de Sessões
+        function filterCategory(cat) {
+            document.getElementById('tab-cirurgica').className = cat === 'cirurgica' ? 'tab-active py-2 font-bold text-sm' : 'py-2 font-bold text-sm text-slate-400';
+            document.getElementById('tab-ortopedica').className = cat === 'ortopedica' ? 'tab-active py-2 font-bold text-sm' : 'py-2 font-bold text-sm text-slate-400';
+            renderStore(cat);
+        }
+
+        function renderStore(cat) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            products.filter(p => p.cat === cat).forEach(p => {
+                grid.innerHTML += `
+                    <div class="bg-white p-3 rounded-[2rem] border border-slate-100 text-center shadow-sm">
+                        <img src="${p.img}" class="w-full h-24 object-cover rounded-2xl mb-3">
+                        <h3 class="font-bold text-[11px] mb-1">${p.name}</h3>
+                        <p class="text-[8px] text-slate-400 font-bold mb-3">500 un. disponíveis</p>
+                        <button onclick="startAssist('${p.name}', '${p.cat}')" class="w-full bg-slate-900 text-white py-2 rounded-xl text-[10px] font-black uppercase tracking-wider">Configurar</button>
+                    </div>
+                `;
+            });
+        }
+
         function showSection(id) {
-            document.querySelectorAll('main section').forEach(s => s.classList.add('hidden'));
-            document.getElementById('sec-' + id).classList.remove('hidden');
-            
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('text-jade', 'border-t-2', 'border-jade'));
-            document.getElementById('btn-' + id).classList.add('text-jade', 'border-t-2', 'border-jade');
-
-            if(id === 'assistente') initAssistente();
-            if(id === 'carrinho') renderCarrinho();
-            window.scrollTo(0,0);
+            document.getElementById('sec-loja').classList.toggle('hidden', id !== 'loja');
+            document.getElementById('sec-carrinho').classList.toggle('hidden', id !== 'carrinho');
+            if(id === 'carrinho') renderCart();
         }
 
-        // Renderizar Loja
-        const vitrine = document.getElementById('vitrine');
-        produtos.forEach(p => {
-            vitrine.innerHTML += `
-                <div class="bg-white p-3 rounded-[2rem] border border-slate-100 text-center">
-                    <img src="${p.img}" class="w-full h-24 object-cover rounded-2xl mb-3">
-                    <h3 class="font-bold text-xs">${p.nome}</h3>
-                    <p class="text-[9px] text-slate-400 font-bold mb-3 uppercase">500 un. disponíveis</p>
-                    <button onclick="configurarItem('${p.nome}')" class="w-full bg-jade text-white py-2 rounded-xl text-[10px] font-black">ADICIONAR</button>
-                </div>
-            `;
-        });
-
-        // Assistente Inteligente
-        function configurarItem(nome) {
-            assistenteData = { modelo: nome };
-            showSection('assistente');
-        }
-
-        function initAssistente() {
-            const chat = document.getElementById('chat-box');
-            chat.innerHTML = '';
-            talk("Qual o <b>sexo</b> do pet?");
+        function startAssist(name, cat) {
+            activeItem = { name, cat };
+            document.getElementById('sec-assistente').classList.remove('hidden');
+            document.getElementById('chat-box').innerHTML = '';
+            talk(`Olá! Escolheu <b>${name}</b>. Qual o sexo do pet?`);
             document.getElementById('chat-actions').innerHTML = `
-                <button onclick="stepSex('Macho')" class="bg-slate-900 text-white px-4 py-2 rounded-lg font-bold text-xs">Macho</button>
-                <button onclick="stepSex('Fêmea')" class="bg-slate-900 text-white px-4 py-2 rounded-lg font-bold text-xs">Fêmea</button>
+                <button onclick="setStep('sexo', 'Macho')" class="bg-jade text-white px-5 py-2 rounded-lg font-bold text-xs">Macho</button>
+                <button onclick="setStep('sexo', 'Fêmea')" class="bg-jade text-white px-5 py-2 rounded-lg font-bold text-xs">Fêmea</button>
             `;
         }
 
         function talk(txt, side = 'bot') {
-            const chat = document.getElementById('chat-box');
+            const box = document.getElementById('chat-box');
             const d = document.createElement('div');
-            d.className = side === 'bot' ? "bg-white p-3 rounded-2xl text-xs border border-slate-200 max-w-[80%]" : "bg-jade text-white p-3 rounded-2xl text-xs ml-auto font-bold";
+            d.className = side === 'bot' ? "bg-slate-100 p-3 rounded-2xl text-xs max-w-[85%] self-start" : "bg-jade text-white p-3 rounded-2xl text-xs max-w-[85%] self-end font-bold";
             d.innerHTML = txt;
-            chat.appendChild(d);
-            chat.scrollTop = chat.scrollHeight;
+            box.appendChild(d);
+            box.scrollTop = box.scrollHeight;
         }
 
-        function stepSex(s) {
-            assistenteData.sexo = s;
-            talk(s, 'user');
-            talk("Qual o <b>peso</b> aproximado (kg)?");
-            document.getElementById('chat-actions').innerHTML = `
-                <input type="number" id="w-in" class="border p-2 rounded-lg w-20 text-xs" placeholder="0">
-                <button onclick="stepWeight()" class="bg-jade text-white px-4 py-2 rounded-lg font-bold text-xs">OK</button>
-            `;
+        function setStep(field, val) {
+            activeItem[field] = val;
+            talk(val, 'user');
+            if(field === 'sexo') {
+                talk("Qual o <b>peso</b> aproximado (kg)?");
+                document.getElementById('chat-actions').innerHTML = `
+                    <input type="number" id="w-in" class="border p-2 rounded-lg w-20 text-xs" placeholder="kg">
+                    <button onclick="setStep('peso', document.getElementById('w-in').value)" class="bg-slate-900 text-white px-4 py-2 rounded-lg font-bold text-xs">OK</button>
+                `;
+            } else if(field === 'peso') {
+                activeItem.size = val <= 4 ? "P" : val <= 10 ? "M" : "G";
+                talk(`Tamanho sugerido: <b>${activeItem.size}</b>. Qual a <b>quantidade</b>?`);
+                document.getElementById('chat-actions').innerHTML = `
+                    <input type="number" id="q-in" class="border p-2 rounded-lg w-20 text-xs" value="1">
+                    <button onclick="addToCart(document.getElementById('q-in').value)" class="bg-jade text-white px-4 py-2 rounded-lg font-bold text-xs text-black">ADICIONAR</button>
+                `;
+            }
         }
 
-        function stepWeight() {
-            const w = document.getElementById('w-in').value;
-            assistenteData.peso = w;
-            assistenteData.tamanho = w <= 3 ? "01" : w <= 6 ? "02" : "03"; // Simulação de cálculo
-            talk(w + "kg", 'user');
-            talk(`Tamanho sugerido: <b>${assistenteData.tamanho}</b>. Quantas unidades?`);
-            document.getElementById('chat-actions').innerHTML = `
-                <input type="number" id="q-in" class="border p-2 rounded-lg w-20 text-xs" value="1">
-                <button onclick="addFinal()" class="bg-slate-900 text-white px-4 py-2 rounded-lg font-bold text-xs">ADICIONAR</button>
-            `;
-        }
-
-        function addFinal() {
-            assistenteData.qtd = parseInt(document.getElementById('q-in').value);
-            carrinho.push({...assistenteData});
+        function addToCart(q) {
+            activeItem.qty = parseInt(q);
+            cart.push({...activeItem});
             updateBadges();
-            talk("Item adicionado ao carrinho!", 'bot');
-            document.getElementById('chat-actions').innerHTML = `
-                <button onclick="showSection('loja')" class="bg-slate-100 text-slate-600 px-4 py-2 rounded-lg font-bold text-xs">ESCOLHER MAIS</button>
-                <button onclick="showSection('carrinho')" class="bg-jade text-white px-4 py-2 rounded-lg font-bold text-xs">VER CARRINHO</button>
-            `;
+            closeAssistant();
+            showSection('carrinho');
         }
 
         function updateBadges() {
-            const total = carrinho.reduce((acc, i) => acc + i.qtd, 0);
-            document.getElementById('cart-count').innerText = total;
-            document.getElementById('atacado-badge').style.display = total >= 20 ? 'block' : 'none';
+            const total = cart.reduce((acc, i) => acc + i.qty, 0);
+            document.getElementById('cart-badge').innerText = total;
+            document.getElementById('atacado-alert').classList.toggle('hidden', total < 20);
         }
 
-        function renderCarrinho() {
-            const list = document.getElementById('cart-list');
-            const footer = document.getElementById('cart-footer');
-            if(carrinho.length === 0) {
-                list.innerHTML = `<div class="text-center py-12 text-slate-400 font-medium text-sm">Seu carrinho está vazio.</div>`;
-                footer.classList.add('hidden');
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const totalBox = document.getElementById('cart-total-box');
+            const empty = document.getElementById('cart-empty');
+            
+            if(cart.length === 0) {
+                container.innerHTML = '';
+                totalBox.classList.add('hidden');
+                empty.classList.remove('hidden');
                 return;
             }
-            footer.classList.remove('hidden');
-            list.innerHTML = '';
-            carrinho.forEach((item, idx) => {
-                list.innerHTML += `
-                    <div class="bg-white p-4 rounded-2xl flex justify-between items-center border border-slate-100">
+            
+            empty.classList.add('hidden');
+            totalBox.classList.remove('hidden');
+            container.innerHTML = '';
+            cart.forEach((item, idx) => {
+                container.innerHTML += `
+                    <div class="bg-white p-4 rounded-2xl flex justify-between items-center shadow-sm">
                         <div>
-                            <p class="font-bold text-sm">${item.modelo} - Tam ${item.tamanho}</p>
-                            <p class="text-[10px] text-slate-400">${item.sexo} | ${item.peso}kg</p>
+                            <p class="font-black text-sm">${item.name} (${item.size})</p>
+                            <p class="text-[10px] text-slate-400 font-bold uppercase">${item.cat === 'cirurgica' ? 'Pós-Cirúrgica' : 'Ortopédica'}</p>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <span class="font-black text-jade">${item.qtd}un</span>
-                            <button onclick="remover(${idx})" class="text-red-400"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        <div class="flex items-center gap-4">
+                            <span class="font-black text-jade">${item.qty} un</span>
+                            <button onclick="remove(${idx})" class="text-red-400"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                         </div>
                     </div>
                 `;
             });
-            document.getElementById('total-itens-footer').innerText = carrinho.reduce((acc, i) => acc + i.qtd, 0);
+            document.getElementById('total-qty').innerText = cart.reduce((acc, i) => acc + i.qty, 0);
             lucide.createIcons();
         }
 
-        function remover(idx) {
-            carrinho.splice(idx, 1);
-            updateBadges();
-            renderCarrinho();
-        }
+        function remove(idx) { cart.splice(idx, 1); updateBadges(); renderCart(); }
+        function closeAssistant() { document.getElementById('sec-assistente').classList.add('hidden'); }
 
-        function sendWhatsApp() {
-            const total = carrinho.reduce((acc, i) => acc + i.qtd, 0);
-            let lista = carrinho.map(i => `• ${i.qtd}x ${i.modelo} (Tam: ${i.tamanho}) - ${i.sexo}`).join('\n');
-            const msg = `Olá WPet! Gostaria de finalizar meu pedido:
----
-${lista}
----
-📦 Total: ${total} unidades
-${total >= 20 ? "🚀 *PEDIDO COM PREÇO DE ATACADO*" : "🛒 Varejo"}
-Aguardo o atendimento!`;
+        function sendWA() {
+            const total = cart.reduce((acc, i) => acc + i.qty, 0);
+            let lista = cart.map(i => `• ${i.qty}x ${i.name} [${i.cat.toUpperCase()}] - Tam: ${i.size} (${i.sexo})`).join('\n');
+            const msg = `Olá WPet! Quero finalizar meu pedido:\n---\n${lista}\n---\n📦 Total: ${total} itens\n${total >= 20 ? '🔥 *APLICAR DESCONTO ATACADO*' : ''}`;
             window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`);
         }
 
-        // Iniciar na Home
-        showSection('home');
+        renderStore('cirurgica');
     </script>
 </body>
 </html>
