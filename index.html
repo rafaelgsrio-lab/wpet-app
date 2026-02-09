@@ -3,168 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WPet - Conforto que Cura</title>
+    <title>WPet - Sistema de Pedidos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
         .bg-jade { background-color: #80CBC4; }
         .text-jade { color: #00695C; }
-        .border-jade { border-color: #80CBC4; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .chat-container { height: 400px; overflow-y: auto; }
+        .alert-wholesale { display: none; }
+        /* Ajuste para o chat não ter espaços vazios */
+        #chat-window { display: flex; flex-direction: column; gap: 1rem; }
     </style>
 </head>
-<body class="bg-slate-50">
+<body class="bg-slate-50 text-slate-900">
 
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 h-20 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="bg-jade p-2 rounded-xl text-white shadow-lg">
-                    <i data-lucide="dog"></i>
-                </div>
-                <span class="text-2xl font-black tracking-tighter text-slate-900">WPET<span class="text-jade">.</span></span>
+    <div id="wholesale-tag" class="alert-wholesale fixed top-24 left-1/2 -translate-x-1/2 z-[100] bg-green-600 text-white px-6 py-3 rounded-full shadow-2xl font-black animate-bounce">
+        🚀 PREÇO DE ATACADO ATIVADO! (20+ ITENS)
+    </div>
+
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 h-20">
+        <div class="max-w-7xl mx-auto px-4 h-full flex justify-between items-center">
+            <a href="#" onclick="location.reload()" class="flex items-center gap-2 group">
+                <div class="bg-jade p-2 rounded-xl text-white group-hover:scale-110 transition-transform"><i data-lucide="dog"></i></div>
+                <span class="text-2xl font-extrabold tracking-tighter">WPET<span class="text-jade">.</span></span>
+            </a>
+            <div class="bg-slate-900 text-white px-5 py-2 rounded-full text-xs font-black">
+                TOTAL ITENS: <span id="cart-total">0</span>
             </div>
-            <a href="https://wa.me/5524992618871" class="bg-slate-900 text-white px-6 py-2.5 rounded-full text-sm font-bold hover:scale-105 transition-transform shadow-lg">Atacado</a>
         </div>
     </nav>
 
-    <section class="relative pt-12 pb-24 overflow-hidden px-4">
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-            <div class="animate__animated animate__fadeInLeft">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-jade/10 text-jade text-xs font-bold uppercase tracking-widest mb-6">
-                    <i data-lucide="award" class="w-4 h-4"></i> Recovery Wear Premium
-                </div>
-                <h1 class="text-5xl lg:text-7xl font-black text-slate-900 leading-tight mb-8">
-                    A Roupa que <span class="text-jade underline decoration-wavy decoration-jade/30 underline-offset-8">Abraça</span> seu Pet.
-                </h1>
-                <p class="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl">Tecnologia de ponta em tecidos hipoalergênicos para uma recuperação segura e com estilo único.</p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#assistant" class="bg-jade text-white px-8 py-4 rounded-2xl font-black shadow-xl hover:-translate-y-1 transition-all flex items-center gap-2">Descobrir Tamanho Ideal <i data-lucide="arrow-right"></i></a>
-                </div>
+    <section class="py-12 px-4 max-w-7xl mx-auto">
+        <h2 class="text-3xl font-black mb-2 text-center">Nossa Coleção</h2>
+        <p class="text-center text-slate-500 mb-12 italic">500 unidades disponíveis para cada modelo</p>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="product-grid">
             </div>
-            <div class="relative animate__animated animate__zoomIn">
-                <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=800" class="rounded-[3rem] shadow-2xl border-8 border-white object-cover aspect-[4/3]" alt="Pet WPet">
-            </div>
-        </div>
     </section>
 
-    <section id="catalog" class="py-24 bg-white px-4">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl font-black text-slate-900 text-center mb-16">Nossos Produtos</h2>
-            <div class="grid md:grid-cols-3 gap-8" id="product-list">
-                </div>
-        </div>
-    </section>
-
-    <section id="assistant" class="py-24 bg-slate-50 px-4">
-        <div class="max-w-3xl mx-auto">
-            <div class="bg-white rounded-[3rem] shadow-2xl border border-slate-100 overflow-hidden flex flex-col">
-                <div class="bg-slate-900 p-6 flex items-center gap-4 text-white">
-                    <div class="w-10 h-10 bg-jade rounded-2xl flex items-center justify-center"><i data-lucide="message-square"></i></div>
-                    <div>
-                        <p class="font-black text-sm">Assistente Virtual WPet</p>
-                        <p class="text-[10px] text-jade font-bold uppercase">Online para te ajudar</p>
-                    </div>
-                </div>
-                <div id="chat-box" class="chat-container p-6 space-y-4 no-scrollbar bg-slate-50">
-                    <div class="bg-white p-4 rounded-2xl shadow-sm text-sm font-medium text-slate-700 max-w-[80%]">
-                        Olá! Escolha a categoria do seu pet para começarmos:
-                    </div>
-                </div>
-                <div id="chat-inputs" class="p-6 border-t border-slate-100 flex flex-wrap gap-2">
-                    <button onclick="selectCategory('Cães')" class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold hover:border-jade">Cães</button>
-                    <button onclick="selectCategory('Gatos')" class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold hover:border-jade">Gatos</button>
-                    <button onclick="selectCategory('Ortopédica')" class="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold hover:border-jade">Ortopédica</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-white pt-24 pb-12 border-t border-slate-100 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-12 mb-12">
+    <section id="assistant" class="py-12 px-4 bg-slate-100">
+        <div class="max-w-xl mx-auto bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-200">
+            <div class="bg-slate-900 p-5 text-white flex items-center gap-3">
+                <div class="bg-jade p-2 rounded-lg text-white"><i data-lucide="bot" class="w-5 h-5"></i></div>
                 <div>
-                    <span class="text-2xl font-black text-slate-900">WPET<span class="text-jade">.</span></span>
-                    <p class="text-slate-500 mt-4 max-w-sm font-medium">Líder nacional em vestuário veterinário premium.</p>
-                </div>
-                <div class="text-sm font-medium text-slate-500 space-y-2">
-                    <p><strong>CNPJ:</strong> 45.252.777/0001-81</p>
-                    <p><strong>Endereço:</strong> Estrada São Vicente nº 200, Sapucaia RJ</p>
-                    <p><strong>WhatsApp:</strong> (24) 99261-8871</p>
+                    <p class="font-bold text-sm">Assistente WPet</p>
+                    <p class="text-[10px] text-jade font-bold uppercase tracking-widest">Calculadora de Tamanho</p>
                 </div>
             </div>
-            <div class="text-center text-[10px] text-slate-400 font-bold uppercase tracking-widest border-t pt-8">
-                © 2026 WPet Recovery Wear - Todos os direitos reservados
+            
+            <div class="p-6 bg-slate-50">
+                <div id="chat-window" class="max-h-[400px] overflow-y-auto mb-4">
+                    <div class="bg-white p-4 rounded-2xl shadow-sm text-sm border border-slate-100 max-w-[85%] self-start text-slate-700">
+                        Olá! Sou o assistente WPet. Vamos calcular o tamanho ideal? <b>Qual o sexo do pet?</b>
+                    </div>
+                </div>
+
+                <div id="chat-actions" class="flex flex-wrap gap-2 pt-2 border-t border-slate-200">
+                    <button onclick="stepSex('Macho')" class="bg-slate-900 text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-black transition-all">Macho</button>
+                    <button onclick="stepSex('Fêmea')" class="bg-slate-900 text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-black transition-all">Fêmea</button>
+                </div>
             </div>
         </div>
+    </section>
+
+    <footer class="bg-white py-12 border-t text-center text-slate-400">
+        <p class="text-xs font-bold">WPet Indústria e Comércio © 2026</p>
+        <p class="text-[10px] mt-1">CNPJ: 45.252.777/0001-81 | Sapucaia - RJ</p>
     </footer>
 
     <script>
-        // Inicializa ícones
         lucide.createIcons();
+        const WA_NUMBER = "5524992618871";
+        let cartTotal = 0;
+        let assistData = { sex: '', weight: '', color: '', qty: 1 };
 
-        // Dados
-        const products = [
-            { name: 'Roupa Pós-Cirúrgica Cães', price: 'R$ 29,00', img: 'https://images.unsplash.com/photo-1541591415600-61e62747c29e?auto=format&fit=crop&q=80&w=600' },
-            { name: 'Roupa Pós-Cirúrgica Gatos', price: 'R$ 31,00', img: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600' },
-            { name: 'Roupa Ortopédica', price: 'R$ 34,00', img: 'https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=600' }
+        const catalog = [
+            { name: "Rosa Candy", color: "#F8BBD0" },
+            { name: "Azul Céu", color: "#B3E5FC" },
+            { name: "Verde Oceânico", color: "#00695C" },
+            { name: "Verde Jade", color: "#80CBC4" },
+            { name: "Love", color: "#ff80ab", desc: "Corações" },
+            { name: "Praia Viva", color: "#4fc3f7", desc: "Estrela-do-mar" },
+            { name: "Zoo Fun", color: "#aed581", desc: "Carinhas" },
+            { name: "Happy Mood", color: "#ffd54f", desc: "Doodles" }
         ];
 
-        // Vitrine
-        const list = document.getElementById('product-list');
-        products.forEach(p => {
-            list.innerHTML += `
-                <div class="bg-white border border-slate-100 rounded-[2.5rem] p-4 shadow-sm hover:shadow-xl transition-all">
-                    <img src="${p.img}" class="rounded-[2rem] aspect-square object-cover mb-4">
-                    <h3 class="font-bold text-lg">${p.name}</h3>
-                    <p class="text-jade font-black mt-2">${p.price}</p>
+        const grid = document.getElementById('product-grid');
+        catalog.forEach((item, index) => {
+            grid.innerHTML += `
+                <div class="bg-white p-4 rounded-[2rem] border border-slate-100 shadow-sm text-center hover:shadow-md transition-all">
+                    <div class="w-full h-20 rounded-2xl mb-3 flex items-center justify-center font-black text-white text-[10px] uppercase shadow-inner" style="background: ${item.color}">
+                        ${item.desc || item.name}
+                    </div>
+                    <h3 class="font-bold text-xs mb-1">${item.name}</h3>
+                    <p class="text-[9px] text-slate-400 font-bold mb-3">500 un. disponíveis</p>
+                    <input type="number" id="qty-${index}" value="0" min="0" onchange="updateTotal()" class="w-full border border-slate-200 rounded-lg text-center font-bold p-1 text-xs focus:ring-2 focus:ring-jade outline-none">
                 </div>
             `;
         });
 
-        // Lógica do Assistente (Simplicada para o HTML único)
-        let state = { cat: '', weight: 0 };
-
-        function addMsg(text, isUser = false) {
-            const chat = document.getElementById('chat-box');
-            const div = document.createElement('div');
-            div.className = isUser ? "bg-jade text-white p-4 rounded-2xl self-end text-sm ml-auto max-w-[80%]" : "bg-white p-4 rounded-2xl shadow-sm text-sm text-slate-700 max-w-[80%]";
-            div.innerText = text;
-            chat.appendChild(div);
-            chat.scrollTop = chat.scrollHeight;
+        function updateTotal() {
+            let total = 0;
+            catalog.forEach((_, i) => {
+                total += parseInt(document.getElementById(`qty-${i}`).value) || 0;
+            });
+            cartTotal = total;
+            document.getElementById('cart-total').innerText = total;
+            document.getElementById('wholesale-tag').style.display = total >= 20 ? 'block' : 'none';
         }
 
-        function selectCategory(c) {
-            state.cat = c;
-            addMsg(c, true);
-            if(c === 'Cães') {
-                addMsg("Qual o peso do seu cão em kg?");
-                document.getElementById('chat-inputs').innerHTML = `
-                    <input type="number" id="weight-input" class="p-2 border rounded-xl" placeholder="Ex: 10">
-                    <button onclick="confirmWeight()" class="bg-slate-900 text-white px-4 py-2 rounded-xl">Confirmar</button>
+        function talk(text, side = 'bot') {
+            const win = document.getElementById('chat-window');
+            const d = document.createElement('div');
+            d.className = side === 'bot' ? 
+                "bg-white p-4 rounded-2xl shadow-sm text-sm border border-slate-100 max-w-[85%] self-start text-slate-700 mb-2" : 
+                "bg-jade text-white p-3 rounded-2xl shadow-sm text-sm ml-auto max-w-[80%] mb-2 font-bold";
+            d.innerHTML = text;
+            win.appendChild(d);
+            win.scrollTop = win.scrollHeight;
+        }
+
+        function stepSex(s) {
+            assistData.sex = s;
+            talk(s, 'user');
+            setTimeout(() => {
+                talk("Qual o <b>peso aproximado</b> do pet em kg?");
+                document.getElementById('chat-actions').innerHTML = `
+                    <div class="flex gap-2 w-full">
+                        <input type="number" id="w-val" class="border border-slate-300 p-2 rounded-xl w-full focus:outline-jade" placeholder="Ex: 8">
+                        <button onclick="stepWeight()" class="bg-jade text-white px-6 py-2 rounded-xl font-bold">OK</button>
+                    </div>
                 `;
-            } else {
-                addMsg("Qual o peso do seu pet?");
-                // Simplificado para este exemplo
-            }
+            }, 300);
         }
 
-        function confirmWeight() {
-            const w = document.getElementById('weight-input').value;
-            state.weight = w;
-            addMsg(w + "kg", true);
-            addMsg("Peso recebido! Clique abaixo para finalizar no WhatsApp.");
-            document.getElementById('chat-inputs').innerHTML = `
-                <button onclick="finish()" class="bg-green-500 text-white px-6 py-3 rounded-2xl font-black w-full">Finalizar no WhatsApp</button>
-            `;
+        function stepWeight() {
+            const weightVal = document.getElementById('w-val').value;
+            if(!weightVal) return alert("Digite o peso!");
+            assistData.weight = weightVal;
+            talk(weightVal + "kg", 'user');
+            setTimeout(() => {
+                talk("Escolha a <b>Cor ou Estampa</b>:");
+                let buttons = '';
+                catalog.forEach(item => {
+                    buttons += `<button onclick="stepColor('${item.name}')" class="border border-slate-200 p-2 rounded-lg text-[10px] font-bold bg-white hover:bg-slate-50 transition-all shadow-sm">${item.name}</button>`;
+                });
+                document.getElementById('chat-actions').innerHTML = `<div class="grid grid-cols-2 gap-2 w-full">${buttons}</div>`;
+            }, 300);
         }
 
-        function finish() {
-            const msg = `Olá WPet! Quero uma roupa para meu pet de ${state.weight}kg.`;
-            window.open(`https://wa.me/5524992618871?text=${encodeURIComponent(msg)}`);
+        function stepColor(c) {
+            assistData.color = c;
+            talk(c, 'user');
+            setTimeout(() => {
+                talk("Qual a <b>quantidade</b> deste item?");
+                document.getElementById('chat-actions').innerHTML = `
+                    <div class="flex gap-2 w-full">
+                        <input type="number" id="q-val" class="border border-slate-300 p-2 rounded-xl w-full focus:outline-jade" value="1">
+                        <button onclick="stepFinish()" class="bg-slate-900 text-white px-6 py-2 rounded-xl font-bold uppercase text-xs">Próximo</button>
+                    </div>
+                `;
+            }, 300);
+        }
+
+        function stepFinish() {
+            assistData.qty = document.getElementById('q-val').value;
+            talk(assistData.qty + " unidades", 'user');
+            setTimeout(() => {
+                talk("<b>Cálculo concluído!</b> Clique abaixo para enviar as especificações ao nosso WhatsApp.");
+                document.getElementById('chat-actions').innerHTML = `
+                    <button onclick="sendWA()" class="bg-green-600 text-white w-full py-4 rounded-2xl font-black shadow-lg hover:bg-green-700 transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="message-circle"></i> ENVIAR PEDIDO AGORA
+                    </button>
+                `;
+                lucide.createIcons();
+            }, 300);
+        }
+
+        function sendWA() {
+            const msg = `Olá WPet! Tenho interesse no seguinte pedido:
+---
+🐾 *Pet:* ${assistData.sex} / ${assistData.weight}kg
+🎨 *Modelo:* ${assistData.color}
+🔢 *Qtd do Assistente:* ${assistData.qty} un
+🛒 *Total Geral no Carrinho:* ${cartTotal} un
+---
+${cartTotal >= 20 ? "🚀 *PEDIDO COM PREÇO DE ATACADO*" : "🔹 Pedido de Varejo"}`;
+            window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`);
         }
     </script>
 </body>
