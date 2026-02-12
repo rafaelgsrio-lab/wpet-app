@@ -1,3 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WPet Hospitalar | Soluções Pós-Cirúrgicas Veterinárias</title>
+    <meta name="description" content="WPet Hospitalar - Roupas técnicas pós-cirúrgicas e ortopédicas para clínicas e hospitais veterinários.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: system-ui, sans-serif; }
+        .hidden-sec { display:none; }
+        .nav-active { color:#00695C !important; font-weight:700; }
+        .hero-bg { background: linear-gradient(135deg,#004D40,#00796B); }
+        .product-card:hover { transform: translateY(-4px); transition: 0.3s; }
+        .logo-top { height:56px; margin-top:18px; }
+        .subsec { display:none; }
+        .slider { position:relative; overflow:hidden; }
+        .slide { display:none; }
+        .slide.active { display:block; }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 bg-white shadow z-50 h-16 flex justify-between items-center px-6">
+    <div class="flex items-center gap-3 cursor-pointer" onclick="showSection('home')">
+        <img src="logo.png" class="logo-top" onerror="this.style.display='none'">
+        <span class="font-black text-xl ml-3">WPet</span>
+    </div>
+    <div class="flex gap-4 text-sm font-semibold">
+        <button onclick="showSection('home')" id="btn-home" class="nav-btn">
+            <i class="icon-home"></i> Home
+        </button>
+        <button onclick="showSection('linhaPos')" class="nav-btn">
+            <i class="icon-post-op"></i> Linha Pós-Cirúrgica
+        </button>
+        <button onclick="showSection('linhaOrto')" class="nav-btn">
+            <i class="icon-ortho"></i> Linha Ortopédica
+        </button>
+        <button onclick="showSection('assistente')" class="nav-btn">
+            <i class="icon-assistant"></i> Assistente
+        </button>
+    </div>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="pt-24 hero-bg text-white text-center pb-24">
+    <h1 class="text-4xl font-bold">🐾 Pós-operatório com mais eficiência e confiança</h1>
+    <p class="mt-4 max-w-xl mx-auto text-lg opacity-90">
+        Roupas pós-cirúrgicas e ortopédicas para uso profissional
+
+        Reduza complicações, aumente a satisfação dos tutores e ofereça o melhor cuidado aos seus pacientes.
+    </p>
+    <button onclick="abrirLinha('pos')" class="bg-white text-teal-700 px-6 py-3 rounded font-bold">
+        👉 Solicite condições exclusivas para sua clínica
+    </button>
+    
+    <div class="mt-10">
+        <h2 class="text-3xl font-bold mt-10">🐾 Soluções Profissionais em Roupas Pós-Cirúrgicas e Ortopédicas</h2>
+        <p class="text-lg opacity-90">Desenvolvidas para clínicas e hospitais veterinários
+
+        Proteção, recuperação e tranquilidade para seus pacientes — confiança para sua equipe.</p>
+
+        <button onclick="showSection('linhaPos')" class="bg-white text-teal-700 px-6 py-3 rounded font-bold">Linha Pós-Cirúrgica</button>
+        <button onclick="showSection('linhaOrto')" class="bg-white text-teal-700 px-6 py-3 rounded font-bold">Linha Ortopédica</button>
+    </div>
+</section>
+
+<!-- VITRINE LINHA PÓS-CIRÚRGICA -->
 <section id="linhaPos" class="hidden-sec pt-24 px-6 pb-20">
     <h2 class="text-3xl font-bold mb-8 text-center">Linha Pós-Cirúrgica</h2>
     <p class="text-center mb-4">Conforto, proteção e confiança clínica para cães e gatos.</p>
@@ -28,39 +99,160 @@
 
     <!-- Vitrine de Produtos -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Exemplo de Produto -->
         <div class="product-card">
             <h4 class="font-bold">Azul Turquesa</h4>
             <p>A serenidade que transmite confiança clínica.</p>
             <button class="bg-teal-700 text-white px-4 py-2 rounded">[+]</button>
         </div>
-        <!-- Repita para outros produtos -->
-    </div>
-    
-    <!-- Detalhes Expandidos -->
-    <div class="hidden" id="detalhesProduto">
-        <h3>Descrição Completa</h3>
-        <p>Texto original detalhado.</p>
-        <h4>Benefícios:</h4>
-        <ul>
-            <li>Elasticidade</li>
-            <li>Toque suave</li>
-            <li>Durabilidade</li>
-            <li>Higienização</li>
-            <li>Respirabilidade</li>
-        </ul>
-        <button>Solicitar condições exclusivas para clínicas</button>
+        <div class="product-card">
+            <h4 class="font-bold">Verde Jade</h4>
+            <p>A sofisticação que protege.</p>
+            <button class="bg-teal-700 text-white px-4 py-2 rounded">[+]</button>
+        </div>
+        <div class="product-card">
+            <h4 class="font-bold">Verde Oceânico</h4>
+            <p>Energia vibrante para recuperação segura.</p>
+            <button class="bg-teal-700 text-white px-4 py-2 rounded">[+]</button>
+        </div>
+        <div class="product-card">
+            <h4 class="font-bold">Rosa Candy</h4>
+            <p>Doçura que conforta.</p>
+            <button class="bg-teal-700 text-white px-4 py-2 rounded">[+]</button>
+        </div>
     </div>
 
     <!-- Benefícios Institucionais -->
-    <h3>Por que escolher nossa Linha Pós-Cirúrgica?</h3>
-    <ul>
+    <h3 class="text-xl font-bold mt-10">Por que escolher nossa Linha Pós-Cirúrgica?</h3>
+    <ul class="list-disc list-inside mb-4">
         <li>Redução de complicações pós-operatórias</li>
         <li>Maior satisfação dos tutores</li>
         <li>Diferencial competitivo para sua clínica</li>
         <li>Estoque garantido e fornecimento contínuo</li>
     </ul>
 
-    <h3>Transforme o pós-operatório dos seus pacientes com soluções seguras e modernas.</h3>
-    <button>👉 Solicite uma proposta exclusiva para sua clínica</button>
+    <h3 class="text-xl font-bold mt-10">Transforme o pós-operatório dos seus pacientes com soluções seguras e modernas.</h3>
+    <button class="bg-teal-700 text-white px-6 py-3 rounded">👉 Solicite uma proposta exclusiva para sua clínica</button>
 </section>
+
+<!-- VITRINE LINHA ORTOPÉDICA -->
+<section id="linhaOrto" class="hidden-sec pt-24 px-6 pb-20">
+    <h2 class="text-3xl font-bold mb-8 text-center">Linha Ortopédica</h2>
+    <p class="text-center mb-4">Conforto, proteção e confiança clínica para cães e gatos.</p>
+    <p class="text-center mb-8">Recuperação segura e moderna para seus pacientes.</p>
+
+    <!-- Filtros e Navegação -->
+    <div class="flex justify-between mb-4">
+        <div>
+            <strong>Categorias:</strong>
+            <button class="bg-gray-200 px-4 py-1 rounded">Cores Lisas</button>
+            <button class="bg-gray-200 px-4 py-1 rounded">Estampas</button>
+        </div>
+        <div>
+            <strong>Filtros:</strong>
+            <select>
+                <option>Porte do animal</option>
+                <option>Pequeno</option>
+                <option>Médio</option>
+                <option>Grande</option>
+            </select>
+            <select>
+                <option>Indicação clínica</option>
+                <option>Pós-cirúrgico</option>
+                <option>Ortopédico</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Vitrine de Produtos -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="product-card">
+            <h4 class="font-bold">Azul Turquesa</h4>
+            <p>A serenidade que transmite confiança clínica.</p>
+            <button class="bg-teal-700 text-white px-4 py-2 rounded">[+]</button>
+        </div>
+        <div class="product-card">
+            <h4 class="font-bold">Verde Jade</h4>
+            <p>A sofisticação que protege.</p>
+            <button class="bg-teal-700 text-white px-4 py-2 rounded">[+]</button>
+        </div>
+        <div class="product-card">
+            <h4 class="font-bold">Verde Oceânico</h4>
+            <p>Energia vibrante para recuperação segura.</p>
+            <button class="bg-teal-700 text-white px-4 py-2 rounded">[+]</button>
+        </div>
+        <div class="product-card">
+            <h4 class="font-bold">Rosa Candy</h4>
+            <p>Doçura que conforta.</p>
+            <button class="bg-teal-700 text-white px-4 py-2 rounded">[+]</button>
+        </div>
+    </div>
+
+    <!-- Benefícios Institucionais -->
+    <h3 class="text-xl font-bold mt-10">Por que escolher nossa Linha Ortopédica?</h3>
+    <ul class="list-disc list-inside mb-4">
+        <li>Redução de complicações pós-operatórias</li>
+        <li>Maior satisfação dos tutores</li>
+        <li>Diferencial competitivo para sua clínica</li>
+        <li>Estoque garantido e fornecimento contínuo</li>
+    </ul>
+
+    <h3 class="text-xl font-bold mt-10">Transforme o pós-operatório dos seus pacientes com soluções seguras e modernas.</h3>
+    <button class="bg-teal-700 text-white px-6 py-3 rounded">👉 Solicite uma proposta exclusiva para sua clínica</button>
+</section>
+
+<!-- ASSISTENTE -->
+<section id="assistente" class="hidden-sec pt-24 px-6 pb-20 max-w-xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-8">Assistente Inteligente</h2>
+    <div class="bg-white p-6 rounded-xl shadow space-y-4">
+        <input type="text" id="assist-cat" class="w-full border p-3 rounded bg-slate-100" readonly>
+        <input type="text" id="assist-modelo" class="w-full border p-3 rounded bg-slate-100" readonly>
+        <input type="number" id="peso" placeholder="Peso do Pet (kg)" class="w-full border p-3 rounded">
+        <button onclick="calcular()" class="w-full bg-teal-700 text-white py-3 rounded font-bold">Calcular Tamanho Ideal</button>
+        <div id="resultado" class="bg-slate-100 p-4 rounded text-sm"></div>
+    </div>
+</section>
+
+<script>
+    function showSection(id){
+        document.querySelectorAll("section").forEach(sec=>sec.classList.add("hidden-sec"));
+        document.getElementById(id).classList.remove("hidden-sec");
+        window.scrollTo(0,0);
+    }
+
+    function abrirLinha(tipo){
+        showSection("produtos");
+        document.querySelectorAll(".subsec").forEach(s=>s.style.display="none");
+        document.getElementById("linha-"+tipo).style.display="block";
+    }
+
+    function calcular(){
+        const peso = parseFloat(document.getElementById("peso").value);
+        if(!peso){
+            document.getElementById("resultado").innerHTML = "Informe o peso para continuar.";
+            return;
+        }
+        let tamanho = "";
+        if(peso <= 5) tamanho = "PP";
+        else if(peso <= 10) tamanho = "P";
+        else if(peso <= 20) tamanho = "M";
+        else tamanho = "G";
+
+        document.getElementById("resultado").innerHTML = `
+            <strong>Resumo da Seleção:</strong>
+
+            ${document.getElementById("assist-cat").value}
+
+            ${document.getElementById("assist-modelo").value}
+
+            Peso informado: ${peso}kg
+
+
+            <strong>Tamanho Ideal: ${tamanho}</strong>
+        `;
+    }
+
+    showSection("home");
+</script>
+
+</body>
+</html>
