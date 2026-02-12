@@ -1,208 +1,213 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WPet Hospitalar | Soluções Pós-Cirúrgicas Veterinárias</title>
-
-<meta name="description" content="WPet Hospitalar - Roupas técnicas pós-cirúrgicas e ortopédicas para clínicas e hospitais veterinários.">
-
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
-
-<style>
-body { font-family: system-ui, sans-serif; }
-.hidden-sec { display:none; }
-.nav-active { color:#00695C !important; font-weight:700; }
-.hero-bg { background: linear-gradient(135deg,#004D40,#00796B); }
-.product-card:hover { transform: translateY(-4px); transition: 0.3s; }
-
-.logo-top {
-height:56px;
-margin-top:18px; /* sobreposição suave */
-}
-
-.subsec { display:none; }
-
-.slider { position:relative; overflow:hidden; }
-.slide { display:none; }
-.slide.active { display:block; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WPet Hospitalar | Soluções Pós-Cirúrgicas Veterinárias</title>
+    <meta name="description" content="WPet Hospitalar - Roupas técnicas pós-cirúrgicas e ortopédicas para clínicas e hospitais veterinários.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: system-ui, sans-serif; }
+        .hidden-sec { display:none; }
+        .nav-active { color:#00695C !important; font-weight:700; }
+        .hero-bg { background: linear-gradient(135deg,#004D40,#00796B); }
+        .product-card:hover { transform: translateY(-4px); transition: 0.3s; }
+        .logo-top { height:56px; margin-top:18px; }
+        .subsec { display:none; }
+        .slider { position:relative; overflow:hidden; }
+        .slide { display:none; }
+        .slide.active { display:block; }
+    </style>
 </head>
 
 <body class="bg-slate-50 text-slate-800">
 
 <!-- NAV -->
 <nav class="fixed top-0 left-0 right-0 bg-white shadow z-50 h-16 flex justify-between items-center px-6">
-<div class="flex items-center gap-3 cursor-pointer" onclick="showSection('home')">
-<img src="logo.png" class="logo-top" onerror="this.style.display='none'">
-<span class="font-black text-xl ml-3">WPet</span>
-</div>
-
-<div class="flex gap-4 text-sm font-semibold">
-<button onclick="showSection('home')" id="btn-home" class="nav-btn">Home</button>
-<button onclick="showSection('clinicas')" id="btn-clinicas" class="nav-btn">Sou Clínica</button>
-<button onclick="showSection('produtos')" id="btn-produtos" class="nav-btn">Produtos</button>
-<button onclick="showSection('assistente')" class="nav-btn">Assistente</button>
-</div>
+    <div class="flex items-center gap-3 cursor-pointer" onclick="showSection('home')">
+        <img src="logo.png" class="logo-top" onerror="this.style.display='none'">
+        <span class="font-black text-xl ml-3">WPet</span>
+    </div>
+    <div class="flex gap-4 text-sm font-semibold">
+        <button onclick="showSection('home')" id="btn-home" class="nav-btn">Home</button>
+        <button onclick="showSection('clinicas')" id="btn-clinicas" class="nav-btn">Sou Clínica</button>
+        <button onclick="showSection('produtos')" id="btn-produtos" class="nav-btn">Produtos</button>
+        <button onclick="showSection('assistente')" class="nav-btn">Assistente</button>
+    </div>
 </nav>
 
 <!-- HOME -->
 <section id="home" class="pt-24 hero-bg text-white text-center pb-24">
-<h1 class="text-4xl font-bold">Soluções Técnicas Hospitalares</h1>
-<p class="mt-4 max-w-xl mx-auto text-lg opacity-90">
-Roupas pós-cirúrgicas e ortopédicas desenvolvidas para clínicas e hospitais veterinários.
-</p>
+    <h1 class="text-4xl font-bold">🐾 Pós-operatório com mais eficiência e confiança</h1>
+    <p class="mt-4 max-w-xl mx-auto text-lg opacity-90">
+        Roupas pós-cirúrgicas e ortopédicas para uso profissional
 
-<div class="mt-10 flex justify-center gap-6 flex-wrap">
-<button onclick="abrirLinha('pos')" class="bg-white text-teal-700 px-6 py-3 rounded font-bold">
-Linha Pós-Cirúrgica
-</button>
-<button onclick="abrirLinha('orto')" class="bg-white text-teal-700 px-6 py-3 rounded font-bold">
-Linha Ortopédica
-</button>
-</div>
+        Reduza complicações, aumente a satisfação dos tutores e ofereça o melhor cuidado aos seus pacientes.
+    </p>
+    <button onclick="abrirLinha('pos')" class="bg-white text-teal-700 px-6 py-3 rounded font-bold">
+        👉 Solicite condições exclusivas para sua clínica
+    </button>
+
+    <div class="mt-10">
+        <h2 class="text-3xl font-bold mt-10">🐾 Soluções Profissionais em Roupas Pós-Cirúrgicas e Ortopédicas</h2>
+        <p class="text-lg opacity-90">Desenvolvidas para clínicas e hospitais veterinários
+
+        Proteção, recuperação e tranquilidade para seus pacientes — confiança para sua equipe.</p>
+
+        <h3 class="mt-8 font-bold">🔑 Por que nossos produtos são ideais para sua clínica?</h3>
+        <ul class="list-disc list-inside">
+            <li>Recuperação segura e eficaz: reduz complicações pós-operatórias e visitas de emergência.</li>
+            <li>Padronização clínica: modelos adaptados a diferentes portes e espécies, facilitando protocolos internos.</li>
+            <li>Economia de tempo da equipe: roupas fáceis de vestir e higienizar, diminuindo estresse no manejo.</li>
+            <li>Apoio científico: desenvolvidas com base em recomendações veterinárias e testes práticos.</li>
+            <li>Fornecimento contínuo: estoque garantido e entregas rápidas para não interromper o atendimento.</li>
+        </ul>
+
+        <h3 class="mt-8 font-bold">📈 Benefícios para sua instituição</h3>
+        <ul class="list-disc list-inside">
+            <li>Melhora na satisfação dos tutores: pets confortáveis e protegidos aumentam a confiança no serviço.</li>
+            <li>Diferencial competitivo: oferecer alternativas modernas ao cone tradicional.</li>
+            <li>Redução de custos: menos complicações, menos retrabalho, mais eficiência.</li>
+        </ul>
+
+        <h3 class="mt-8 font-bold">🤝 Parcerias que geram valor</h3>
+        <ul class="list-disc list-inside">
+            <li>Condições especiais para compras em volume.</li>
+            <li>Atendimento dedicado para clínicas e hospitais.</li>
+            <li>Suporte técnico e treinamento da equipe sobre uso e adaptação dos produtos.</li>
+        </ul>
+
+        <h3 class="mt-8 font-bold">🚀 Chamada para ação</h3>
+        <p>Transforme o pós-operatório dos seus pacientes.</p>
+        <button onclick="abrirLinha('pos')" class="bg-white text-teal-700 px-6 py-3 rounded font-bold">
+            👉 Solicite uma proposta exclusiva para sua clínica
+        </button>
+    </div>
 </section>
 
 <!-- PRODUTOS -->
 <section id="produtos" class="hidden-sec pt-24 px-6 pb-20">
+    <div id="linha-pos" class="subsec">
+        <h2 class="text-3xl font-bold mb-8 text-center">🐾 Linha Pós-Cirúrgica</h2>
+        <div id="pos-container"></div>
+    </div>
 
-<div id="linha-pos" class="subsec">
-<h2 class="text-3xl font-bold mb-8 text-center">Linha Pós-Cirúrgica</h2>
-<div id="pos-container"></div>
-</div>
-
-<div id="linha-orto" class="subsec">
-<h2 class="text-3xl font-bold mb-8 text-center">Linha Ortopédica</h2>
-<div id="orto-container"></div>
-</div>
-
+    <div id="linha-orto" class="subsec">
+        <h2 class="text-3xl font-bold mb-8 text-center">Linha Ortopédica</h2>
+        <div id="orto-container"></div>
+    </div>
 </section>
 
 <!-- ASSISTENTE -->
 <section id="assistente" class="hidden-sec pt-24 px-6 pb-20 max-w-xl mx-auto">
-
-<h2 class="text-3xl font-bold text-center mb-8">Assistente Inteligente</h2>
-
-<div class="bg-white p-6 rounded-xl shadow space-y-4">
-
-<input type="text" id="assist-cat" class="w-full border p-3 rounded bg-slate-100" readonly>
-<input type="text" id="assist-modelo" class="w-full border p-3 rounded bg-slate-100" readonly>
-
-<input type="number" id="peso" placeholder="Peso do Pet (kg)" class="w-full border p-3 rounded">
-
-<button onclick="calcular()" class="w-full bg-teal-700 text-white py-3 rounded font-bold">
-Calcular Tamanho Ideal
-</button>
-
-<div id="resultado" class="bg-slate-100 p-4 rounded text-sm"></div>
-
-</div>
+    <h2 class="text-3xl font-bold text-center mb-8">Assistente Inteligente</h2>
+    <div class="bg-white p-6 rounded-xl shadow space-y-4">
+        <input type="text" id="assist-cat" class="w-full border p-3 rounded bg-slate-100" readonly>
+        <input type="text" id="assist-modelo" class="w-full border p-3 rounded bg-slate-100" readonly>
+        <input type="number" id="peso" placeholder="Peso do Pet (kg)" class="w-full border p-3 rounded">
+        <button onclick="calcular()" class="w-full bg-teal-700 text-white py-3 rounded font-bold">Calcular Tamanho Ideal</button>
+        <div id="resultado" class="bg-slate-100 p-4 rounded text-sm"></div>
+    </div>
 </section>
 
 <script>
+    const cores = [
+        "Azul Céu","Verde Jade","Verde Oceânico","Rosa Candy"
+    ];
 
-const cores = [
-"Azul Céu","Verde Jade","Verde Oceânico","Rosa Candy"
-];
+    const estampas = [
+        "Estampa Love","Estampa Zoo Fun","Estampa Yellow Happy","Estampa Marine Care"
+    ];
 
-const estampas = [
-"Estampa Love","Estampa Zoo Fun","Estampa Yellow Happy","Estampa Marine Care"
-];
+    function showSection(id){
+        document.querySelectorAll("section").forEach(sec=>sec.classList.add("hidden-sec"));
+        document.getElementById(id).classList.remove("hidden-sec");
+        window.scrollTo(0,0);
+    }
 
-function showSection(id){
-document.querySelectorAll("section").forEach(sec=>sec.classList.add("hidden-sec"));
-document.getElementById(id).classList.remove("hidden-sec");
-window.scrollTo(0,0);
-}
+    function abrirLinha(tipo){
+        showSection("produtos");
+        document.querySelectorAll(".subsec").forEach(s=>s.style.display="none");
+        document.getElementById("linha-"+tipo).style.display="block";
+    }
 
-function abrirLinha(tipo){
-showSection("produtos");
-document.querySelectorAll(".subsec").forEach(s=>s.style.display="none");
-document.getElementById("linha-"+tipo).style.display="block";
-}
+    function criarBloco(containerId, linhaNome){
+        const container = document.getElementById(containerId);
+        container.innerHTML = `
+            <h3 class="text-xl font-bold mt-10 mb-4">Cores Lisas</h3>
+            <div class="grid md:grid-cols-4 gap-6">
+                ${cores.map(c=>cardHTML(linhaNome,c)).join("")}
+            </div>
+            <h3 class="text-xl font-bold mt-12 mb-4">Estampas</h3>
+            <div class="grid md:grid-cols-4 gap-6">
+                ${estampas.map(e=>cardHTML(linhaNome,e)).join("")}
+            </div>
+            <div class="slider mt-12 bg-white rounded-xl shadow p-6">
+                ${[...cores,...estampas].map((p,i)=>`
+                    <div class="slide ${i===0?'active':''}">
+                        <img src="https://via.placeholder.com/600x300?text=${p.replace(/ /g,'+')}" class="w-full rounded mb-4">
+                        <h4 class="font-bold">${linhaNome} - ${p}</h4>
+                    </div>
+                `).join("")}
+            </div>
+        `;
+    }
 
-function criarBloco(containerId, linhaNome){
+    function cardHTML(linha, nome){
+        return `
+            <div class="bg-white rounded-xl shadow p-4 product-card">
+                <h4 class="font-bold mb-2">${linha} - <strong>${nome}</strong></h4>
+                <button onclick="abrirAssistente('${linha}','${nome}')" 
+                class="bg-teal-700 text-white px-4 py-2 rounded w-full">Selecionar no Assistente</button>
+            </div>
+        `;
+    }
 
-const container = document.getElementById(containerId);
+    function abrirAssistente(cat,modelo){
+        showSection("assistente");
+        document.getElementById("assist-cat").value="Categoria: "+cat;
+        document.getElementById("assist-modelo").value="Modelo: "+modelo;
+    }
 
-container.innerHTML = `
+    function calcular(){
+        const peso=parseFloat(document.getElementById("peso").value);
+        if(!peso){
+            document.getElementById("resultado").innerHTML="Informe o peso para continuar.";
+            return;
+        }
+        let tamanho="";
+        if(peso<=5) tamanho="PP";
+        else if(peso<=10) tamanho="P";
+        else if(peso<=20) tamanho="M";
+        else tamanho="G";
 
-<h3 class="text-xl font-bold mt-10 mb-4">Cores Lisas</h3>
-<div class="grid md:grid-cols-4 gap-6">
-${cores.map(c=>cardHTML(linhaNome,c)).join("")}
-</div>
+        document.getElementById("resultado").innerHTML=`
+            <strong>Resumo da Seleção:</strong>
 
-<h3 class="text-xl font-bold mt-12 mb-4">Estampas</h3>
-<div class="grid md:grid-cols-4 gap-6">
-${estampas.map(e=>cardHTML(linhaNome,e)).join("")}
-</div>
+            ${document.getElementById("assist-cat").value}
 
-<div class="slider mt-12 bg-white rounded-xl shadow p-6">
-${[...cores,...estampas].map((p,i)=>`
-<div class="slide ${i===0?'active':''}">
-<img src="https://via.placeholder.com/600x300?text=${p.replace(/ /g,'+')}" class="w-full rounded mb-4">
-<h4 class="font-bold">${linhaNome} - ${p}</h4>
-</div>
-`).join("")}
-</div>
-`;
-}
+            ${document.getElementById("assist-modelo").value}
 
-function cardHTML(linha, nome){
-return `
-<div class="bg-white rounded-xl shadow p-4 product-card">
-<img src="https://via.placeholder.com/300x200?text=${nome.replace(/ /g,'+')}" class="w-full rounded mb-3">
-<h4 class="font-bold mb-2">${linha} - ${nome}</h4>
-<button onclick="abrirAssistente('${linha}','${nome}')" 
-class="bg-teal-700 text-white px-4 py-2 rounded w-full">
-Selecionar no Assistente
-</button>
-</div>
-`;
-}
+            Peso informado: ${peso}kg
 
-function abrirAssistente(cat,modelo){
-showSection("assistente");
-document.getElementById("assist-cat").value="Categoria: "+cat;
-document.getElementById("assist-modelo").value="Modelo: "+modelo;
-}
 
-function calcular(){
-const peso=parseFloat(document.getElementById("peso").value);
-if(!peso){
-document.getElementById("resultado").innerHTML="Informe o peso para continuar.";
-return;
-}
-let tamanho="";
-if(peso<=5) tamanho="PP";
-else if(peso<=10) tamanho="P";
-else if(peso<=20) tamanho="M";
-else tamanho="G";
+            <strong>Tamanho Ideal: ${tamanho}</strong>
+        `;
+    }
 
-document.getElementById("resultado").innerHTML=`
-<strong>Resumo da Seleção:</strong><br>
-${document.getElementById("assist-cat").value}<br>
-${document.getElementById("assist-modelo").value}<br>
-Peso informado: ${peso}kg<br><br>
-<strong>Tamanho Ideal: ${tamanho}</strong>
-`;
-}
+    setInterval(()=>{
+        document.querySelectorAll(".slider").forEach(slider=>{
+            const slides=slider.querySelectorAll(".slide");
+            let active=[...slides].findIndex(s=>s.classList.contains("active"));
+            slides[active].classList.remove("active");
+            slides[(active+1)%slides.length].classList.add("active");
+        });
+    },4000);
 
-setInterval(()=>{
-document.querySelectorAll(".slider").forEach(slider=>{
-const slides=slider.querySelectorAll(".slide");
-let active=[...slides].findIndex(s=>s.classList.contains("active"));
-slides[active].classList.remove("active");
-slides[(active+1)%slides.length].classList.add("active");
-});
-},4000);
-
-criarBloco("pos-container","Pós-Cirúrgica");
-criarBloco("orto-container","Ortopédica");
-
-showSection("home");
-
+    criarBloco("pos-container","Pós-Cirúrgica");
+    criarBloco("orto-container","Ortopédica");
+    showSection("home");
 </script>
 
 </body>
