@@ -1,36 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>WPet - Conforto e Recuperação para seu Pet</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 
-    <script>
-        const IMAGE_CONFIG = {
-            // Se usar fotos do próprio GitHub, coloque o caminho como: "img/foto.jpg"
-            // Se usar fotos da internet, coloque o link completo: "https://site.com/foto.jpg"
-            
-            logo: "https://placehold.co/150x50/13ecc8/white?text=WPet+Logo",
-            bannerHero: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=2069&auto=format&fit=crop",
-            produtoDestaque: "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?q=80&w=2070&auto=format&fit=crop",
-            depoimentoUser: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1974&auto=format&fit=crop"
-        };
-
-        // Função para carregar as imagens automaticamente
-        window.onload = () => {
-            document.querySelectorAll('[data-img-key]').forEach(el => {
-                const key = el.getAttribute('data-img-key');
-                if (IMAGE_CONFIG[key]) {
-                    if (el.tagName === 'IMG') el.src = IMAGE_CONFIG[key];
-                    else el.style.backgroundImage = `url('${IMAGE_CONFIG[key]}')`;
-                }
-            });
-        };
-    </script>
-    <script id="tailwind-config">
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WPet - Conforto e Recuperação para seu Pet</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -48,33 +26,11 @@
             },
         }
     </script>
-    <style>
+<style>
         body { font-family: 'Inter', sans-serif; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-[#0d1b19] font-display">
-
-<header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-[#e7f3f1] px-4 md:px-20 py-4 flex justify-between items-center">
-    <img data-img-key="logo" alt="WPet Logo" class="h-10 object-contain">
-    
-    <nav class="hidden md:flex space-x-8 font-medium">
-        <a href="#" class="hover:text-primary transition-colors">Início</a>
-        <a href="#" class="hover:text-primary transition-colors">Produtos</a>
-        <a href="#" class="hover:text-primary transition-colors">Sobre</a>
-        <a href="#" class="hover:text-primary transition-colors">Contato</a>
-    </nav>
-</header>
-
-<main>
-    <section class="relative h-[500px] flex items-center justify-center text-white overflow-hidden">
-        <div data-img-key="bannerHero" class="absolute inset-0 bg-cover bg-center -z-10 brightness-50"></div>
-        <div class="text-center px-4">
-            <h1 class="text-4xl md:text-6xl font-black mb-4">Conforto para seu Pet</h1>
-            <p class="text-xl opacity-90">A recuperação que ele merece com o estilo que você ama.</p>
-        </div>
-    </section>
-</main>
-
-</body>
-</html>
+<!-- Header -->
+<header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-[#e7f3f1] px-4 md:px-20 py-4">
